@@ -15,18 +15,13 @@ public class DailyTemperatures {
     {
        int[] out = new int[temp.length];
         Stack<Integer> stackTemp = new Stack<>();
+        stackTemp.add(temp[0]);
         Stack<Integer> stackIndex = new Stack<>();
+        stackIndex.add(0);
 
         for(int i = 0 ; i < temp.length ; i++)
         {
             int item = temp[i];
-
-            if(stackTemp.size() == 0 )
-            {
-                stackTemp.push(item);
-                stackIndex.push(i);
-                continue;
-            }
 
             if(item > stackTemp.peek())
             {
@@ -34,7 +29,7 @@ public class DailyTemperatures {
                 int arrInd = stackIndex.pop();
                 out[arrInd] = i - arrInd;
 
-                while(stackTemp.size() > 0 && item > stackTemp.peek())
+                while(!stackTemp.isEmpty() && item > stackTemp.peek())
                 {
                     if(item > stackTemp.peek())
                     {
